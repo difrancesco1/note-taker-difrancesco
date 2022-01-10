@@ -1,9 +1,9 @@
 # note-taker
 
-#Purpose
+# Purpose
 Write and save notes
 
-#Built Using the Following Languages and Applications
+# Built Using the Following Languages and Applications
 Javascript
 CSS
 HTML
