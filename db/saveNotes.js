@@ -4,12 +4,12 @@ const util = require('util');
 const uuid = require('uuid').v1;
 
 //function that reads files
-const readNotes = util.promisify(fs.readFile); //readFileAsync
+const readNotes = util.promisify(fs.readFile); 
 
 //functions that writes files
-const writeNotes = util.promisify(fs.writeFile); //writeFileAsync
+const writeNotes = util.promisify(fs.writeFile); 
 
-class Store {
+class storeNotes {
     read() {
         return readNotes('db/db.json', 'utf8')
     }
@@ -23,12 +23,12 @@ class Store {
         if(!title || !text) {
             throw new Error('Please insert a title and task')
         }
-        const newFile = {title, text, id: uuid()} //newNote
+        const newFile = {title, text, id: uuid()} 
 
         return this.createNote()
-            .then(notes => [...notes, newFile]) //newNote
+            .then(notes => [...notes, newFile]) 
             .then(updatedNotes => this.write(updatedNotes))
-            .then(() => this.newFile) //newNote
+            .then(() => this.newFile) 
     }
 
     recieveNotes() {
@@ -41,6 +41,7 @@ class Store {
     removeNote(id) {
         return this.recieveNotes()
             .then(notes => notes.filter(note => note.id !==id))
-            .then(savedNotes => this.write(savedNotes)) //keptNotes
+            .then(savedNotes => this.write(savedNotes)) 
     }
 }
+module.exports = new storeNotes();
