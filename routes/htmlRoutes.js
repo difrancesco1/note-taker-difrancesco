@@ -1,37 +1,24 @@
+const path = require('path');
+
 const router = require('express').Router();
 
-const saveNotes = require('../db/saveNotes.js');
+/*Send Notes Route:
+The first route uses the sendFile() method of res object which send notes.html file
+from the public folder if there is a request going through this route.
+*/
 
-//retrieves all notes that already are in the database 
 router.get('/notes', (req, res) => {
-    saveNotes
-        .recieveNotes()
-        .then(notes => {
-            res.json(notes)
-        })
-        .catch(err => {
-            res.status(500).json(err) //sends error 500 if there is an error
-        })
+    res.sendFile(path.join(__dirname, '../public/notes.html'))
 })
 
-//posts a new note to the server 
-router.post('/notes', (req, res) => {
-    saveNotes
-        .createNote(req.body)
-        .then(note => {
-            res.json(note)
-        })
-        .catch(err => {
-            res.status(500).json(err) //sends error 500 if there is an error
-        })
-})
+/*Send Homepage Route:
+This second route is for all other requests, requests with no file extension.  It sends users back to
+the homepage, the index.html in the public folder.  It does this instead of sending nothing at all because there might be 
+some errors in routing.  
+*/
 
-//deletes notes using their id 
-router.delete('/notes/:id', (req, res) => {
-    saveNotes
-        .removeNote(req.params.id)
-        .then(() => res.json({ ok: true }))
-        .catch(err => res.status(500).json(err)) //sends error 500 if there is an error
+router.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 
 module.exports = router;
