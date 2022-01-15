@@ -1,36 +1,38 @@
+//create router
 const router = require('express').Router();
 
-const store = require('../db/store.js');
+const savedNotes = require('../db/savedNotes.js');
 
+//This route calls all the existing notes from the retrieveNotes method
 router.get('/notes', (req, res) => {
-    store
-        .getNotes()
+    savedNotes                          //This calls retrieveNotes()
+        .retrieveNotes()
         .then(notes => {
             res.json(notes)
         })
         .catch(err => {
-            res.status(500).json(err)
+            res.status(500).json(err)  //Error if not successful 
         })
 })
 
-
+//This route adds a new note to the database
 router.post('/notes', (req, res) => {
-    console.log(req.body)
-    store
-        .addNote(req.body)
+    savedNotes                          //This calls newNote()
+        .newNote(req.body)
         .then(note => {
             res.json(note)
         })
         .catch(err => {
-            res.status(500).json(err)
+            res.status(500).json(err) //Error if not successful 
         })
 })
 
+//This route deletes notes using their ID
 router.delete('/notes/:id', (req, res) => {
-    store
-        .removeNote(req.params.id)
+    savedNotes                          //This calls deleteNote()
+        .deleteNote(req.params.id)
         .then(() => res.json({ ok: true }))
-        .catch(err => res.status(500).json(err))
+        .catch(err => res.status(500).json(err)) //Error if not successful
 })
 
 module.exports = router;
