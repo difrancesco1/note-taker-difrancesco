@@ -2,7 +2,7 @@
 
 This applications primary use is to write and save notes
 
-Heroku Deployed App: 
+Heroku Deployed App: https://note-taker-difrancesco.herokuapp.com/
 
 # User Story
 ![aa](https://user-images.githubusercontent.com/90358453/149604565-71fc92e0-586f-483e-bbec-838965936449.PNG)
