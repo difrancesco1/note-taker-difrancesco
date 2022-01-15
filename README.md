@@ -3,6 +3,7 @@
 This applications primary use is to write and save notes
 
 Heroku Deployed App: https://note-taker-difrancesco.herokuapp.com/
+
 Github Project Link: https://github.com/difrancesco1/note-taker-difrancesco
 
 # User Story
